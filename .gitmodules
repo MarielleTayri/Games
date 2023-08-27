@@ -4,3 +4,6 @@
 [submodule "SecondCount"]
 	path = SecondCount
 	url = git@github.com:MarielleTayri/SecondCount.git
+[submodule "tabata"]
+	path = tabata
+	url = git@github.com:MarielleTayri/tabata.git
