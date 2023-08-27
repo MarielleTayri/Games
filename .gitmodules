@@ -1,3 +1,6 @@
 [submodule "dice"]
 	path = dice
 	url = git@github.com:MarielleTayri/dice.git
+[submodule "SecondCount"]
+	path = SecondCount
+	url = git@github.com:MarielleTayri/SecondCount.git
