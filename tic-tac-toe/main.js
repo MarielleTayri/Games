@@ -7,39 +7,46 @@ const playerTwo = 'O';
 let playerTurn = playerOne;
 
 const winningPatterns = [
-  [0,1,2],
-  [3,4,5],
-  [6,7,8],
-  [0,3,6],
-  [1,4,7],
-  [2,5,8],
-  [0,4,8],
-  [2,4,6],
-]
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
 cells.forEach(cell => {
-  cell.addEventListener('click', playGame, { once: true});
+  cell.addEventListener('click', playGame, { once: true });
 });
 
 function playGame(e) {
   e.target.innerHTML = playerTurn;
 
   if (checkWin(playerTurn)) {
-    updateGameStatus("wins + playerTurn");
+    updateGameStatus(`wins${playerTurn}`);
     return endGame();
   } else if (checkDraw()) {
-    updateGameStatus("draw");
+    updateGameStatus('draw');
     return endGame();
   }
 
   updateGameStatus(playerTurn);
-  playerTurn == playerOne ? playerTurn = playerTwo : playerTurn = playerOne;
+  playerTurn = (playerTurn === playerOne) ? playerTwo : playerOne; // Utilisation de l'opérateur d'égalité === pour comparer.
 }
 
-function checkWin(playerTurn) {}
+function checkWin(player) { // Changement du nom de paramètre pour éviter la confusion avec la variable playerTurn.
+  return winningPatterns.some(combination => {
+    return combination.every(index => {
+      return cells[index].innerHTML === player; // Utilisation de l'opérateur d'égalité === pour comparer.
+    });
+  });
+}
+
 function checkDraw() {
-  return [...cells].every(celle => {
-    return cell.innerHTML == playerOne || cell.innerHTML == playerTwo;
+  return [...cells].every(cell => {
+    return cell.innerHTML === playerOne || cell.innerHTML === playerTwo; // Utilisation de l'opérateur d'égalité === pour comparer.
   });
 }
 
@@ -48,19 +55,19 @@ function updateGameStatus(status) {
 
   switch (status) {
     case 'X':
-      statusText = "Now player O"
+      statusText = "Now player O";
       break;
     case 'O':
-      statusText = "Now player X"
+      statusText = "Now player X";
       break;
     case 'winsX':
-      statusText = "Player X is the winner"
+      statusText = "Player X is the winner";
       break;
     case 'winsO':
-      statusText = "Player O is the winner"
+      statusText = "Player O is the winner";
       break;
     case 'draw':
-      statusText = "It's a draw !"
+      statusText = "It's a draw!";
       break;
   }
 
@@ -68,5 +75,10 @@ function updateGameStatus(status) {
   endgameStatus.innerHTML = statusText;
 }
 
-function endGame() { document.getElementById('gameEnd').style.display = "block"}
-function reloadGame() { window.location.reload()}
+function endGame() {
+  document.getElementById('gameEnd').style.display = "block";
+}
+
+window.reloadGame = function() {
+  window.location.reload();
+};
