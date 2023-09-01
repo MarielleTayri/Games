@@ -33,20 +33,20 @@ function playGame(e) {
   }
 
   updateGameStatus(playerTurn);
-  playerTurn = (playerTurn === playerOne) ? playerTwo : playerOne; // Utilisation de l'opérateur d'égalité === pour comparer.
+  playerTurn = (playerTurn === playerOne) ? playerTwo : playerOne; 
 }
 
-function checkWin(player) { // Changement du nom de paramètre pour éviter la confusion avec la variable playerTurn.
+function checkWin(player) { 
   return winningPatterns.some(combination => {
     return combination.every(index => {
-      return cells[index].innerHTML === player; // Utilisation de l'opérateur d'égalité === pour comparer.
+      return cells[index].innerHTML === player; 
     });
   });
 }
 
 function checkDraw() {
   return [...cells].every(cell => {
-    return cell.innerHTML === playerOne || cell.innerHTML === playerTwo; // Utilisation de l'opérateur d'égalité === pour comparer.
+    return cell.innerHTML === playerOne || cell.innerHTML === playerTwo; 
   });
 }
 
